@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.GestionCoursController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Gestion des cours" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <SplitPane dividerPositions="0.3">
+        <!-- Formulaire d'ajout/modification -->
+        <VBox spacing="15" style="-fx-padding: 10;">
+            <Label text="Ajouter/Modifier un cours" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            
+            <GridPane hgap="10" vgap="10">
+                <Label text="Matière:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="matiereField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                
+                <Label text="Enseignant:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="enseignantField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                
+                <Label text="Classe:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="classeField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                
+                <Label text="Groupe:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="groupeField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                
+                <Label text="Type:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="typeField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                
+                <Label text="Date:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dateField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                
+                <Label text="Créneau:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="creneauField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                
+                <Label text="Salle:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="salleField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                
+                <Label text="Description:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextArea fx:id="descriptionField" GridPane.rowIndex="8" GridPane.columnIndex="1" prefRowCount="3"/>
+            </GridPane>
+            
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Vérifier conflits" onAction="#handleVerifierConflits"/>
+                <Button text="Enregistrer" style="-fx-background-color: #27ae60; -fx-text-fill: white;" onAction="#handleEnregistrerCours"/>
+                <Button text="Annuler" onAction="#handleAnnuler"/>
+            </HBox>
+        </VBox>
+        
+        <!-- Liste des cours -->
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Liste des cours" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            
+            <HBox spacing="10">
+                <Label text="Filtrer par:"/>
+                <ComboBox fx:id="filtreCoursCombo" prefWidth="150"/>
+                <TextField fx:id="rechercheCoursField" promptText="Rechercher..." HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleRechercherCours"/>
+            </HBox>
+            
+            <TableView fx:id="coursTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50"/>
+                    <TableColumn text="Matière" prefWidth="150"/>
+                    <TableColumn text="Enseignant" prefWidth="150"/>
+                    <TableColumn text="Classe" prefWidth="120"/>
+                    <TableColumn text="Date" prefWidth="100"/>
+                    <TableColumn text="Horaire" prefWidth="100"/>
+                    <TableColumn text="Salle" prefWidth="80"/>
+                    <TableColumn text="Type" prefWidth="60"/>
+                    <TableColumn text="Actions" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </SplitPane>
+</VBox>

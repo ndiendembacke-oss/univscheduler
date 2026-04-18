@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.SimpleController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20px;">
+    
+    <Label text="UNIV-SCHEDULER" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Connexion réussie !" style="-fx-font-size: 16px;"/>
+    <Button text="OK" onAction="#handleOK"/>
+    
+</VBox>

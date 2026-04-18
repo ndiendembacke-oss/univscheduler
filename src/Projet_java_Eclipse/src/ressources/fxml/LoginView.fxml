@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.LoginController"
+            prefHeight="500" prefWidth="400">
+    
+    <center>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 40px;">
+            <Label text="UNIV-SCHEDULER" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Connexion à l'application" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+            
+            <TextField fx:id="emailField" promptText="Email" maxWidth="250" style="-fx-padding: 8px;"/>
+            <PasswordField fx:id="passwordField" promptText="Mot de passe" maxWidth="250" style="-fx-padding: 8px;"/>
+            <Button fx:id="loginButton" text="Se connecter" maxWidth="250" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px; -fx-font-weight: bold;"/>
+            <ProgressIndicator fx:id="loadingIndicator" maxWidth="50" maxHeight="50" visible="false"/>
+            <Label fx:id="messageLabel" style="-fx-text-fill: red;" wrapText="true"/>
+        </VBox>
+    </center>
+    
+</BorderPane>

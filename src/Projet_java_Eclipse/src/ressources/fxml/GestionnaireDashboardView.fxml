@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.GestionnaireDashboardController"
+            prefHeight="700" prefWidth="1200">
+    
+    <top>
+        <VBox>
+            <Label text="UNIV-SCHEDULER - Gestionnaire" 
+                   style="-fx-font-size: 20px; -fx-padding: 10px; -fx-background-color: #f39c12; -fx-text-fill: white;"/>
+            <HBox spacing="10" style="-fx-padding: 10px; -fx-background-color: #f1c40f;" alignment="CENTER_LEFT">
+                <Label fx:id="welcomeLabel" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Déconnexion" fx:id="btnDeconnexion" 
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <!-- Onglet 1 : Emploi du temps -->
+            <Tab text="📅 Emploi du temps">
+                <VBox spacing="10" style="-fx-padding: 20px;">
+                    <HBox spacing="10">
+                        <Label text="Classe:"/>
+                        <ComboBox fx:id="classeCombo" prefWidth="200"/>
+                        <Label text="Date:"/>
+                        <DatePicker fx:id="datePicker" prefWidth="150"/>
+                        <Button text="Générer" fx:id="btnGenererEmploi"/>
+                    </HBox>
+                    <TableView fx:id="tableViewEmploi"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 2 : Gestion des cours -->
+            <Tab text="📚 Gestion des cours">
+                <VBox spacing="10" style="-fx-padding: 20px;">
+                    <HBox spacing="10">
+                        <Button text="Ajouter" fx:id="btnAjouterCours"/>
+                        <Button text="Modifier" fx:id="btnModifierCours"/>
+                        <Button text="Supprimer" fx:id="btnSupprimerCours"/>
+                        <Button text="Actualiser" fx:id="btnActualiserCours"/>
+                    </HBox>
+                    <TableView fx:id="tableViewCours"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 3 : Conflits -->
+            <Tab text="⚠️ Conflits">
+                <VBox spacing="10" style="-fx-padding: 20px;">
+                    <HBox spacing="10">
+                        <Button text="Vérifier conflits" fx:id="btnVerifierConflits"/>
+                        <Button text="Résoudre" fx:id="btnResoudreConflit"/>
+                        <Label fx:id="conflitsLabel"/>
+                    </HBox>
+                    <TableView fx:id="tableViewConflits"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 4 : Salles libres -->
+            <Tab text="🏢 Salles libres">
+                <VBox spacing="10" style="-fx-padding: 20px;">
+                    <HBox spacing="10">
+                        <Label text="Jour:"/>
+                        <ComboBox fx:id="salleJourCombo" prefWidth="150"/>
+                        <Button text="Rechercher" fx:id="btnRechercherSalles"/>
+                    </HBox>
+                    <TableView fx:id="tableViewSallesLibres"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+    
+</BorderPane>

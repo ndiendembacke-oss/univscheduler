@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.EtudiantDashboardController"
+            prefHeight="700" prefWidth="1200">
+    
+    <top>
+        <VBox>
+            <Label text="UNIV-SCHEDULER - Espace Étudiant" 
+                   style="-fx-font-size: 20px; -fx-padding: 10px; -fx-background-color: #27ae60; -fx-text-fill: white;"/>
+            <HBox spacing="10" style="-fx-padding: 10px; -fx-background-color: #2ecc71;" alignment="CENTER_LEFT">
+                <VBox>
+                    <Label fx:id="welcomeLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label fx:id="infoLabel" style="-fx-text-fill: white;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" 
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            
+            <!-- Onglet 1 : Emploi du temps -->
+            <Tab text="📅 Mon emploi du temps">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Classe:" style="-fx-font-weight: bold;"/>
+                        <ComboBox fx:id="classeCombo" prefWidth="200"/>
+                        <Label text="Date:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="datePickerEmploi" prefWidth="150"/>
+                        <Button text="Voir" fx:id="btnVoirEmploi" 
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                    </HBox>
+                    <TableView fx:id="tableViewEmploi" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 2 : Salles libres -->
+            <Tab text="🏢 Salles libres">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Date:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="datePickerSalle" prefWidth="150"/>
+                        <Button text="Rechercher" fx:id="btnRechercherSalles" 
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                    </HBox>
+                    <TableView fx:id="tableViewSallesLibres" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </Tab>
+            
+        </TabPane>
+    </center>
+    
+</BorderPane>

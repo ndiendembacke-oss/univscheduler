@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.GestionSallesController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Gestion des salles" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <!-- Barre d'outils -->
+    <ToolBar>
+        <Button text="Ajouter une salle" style="-fx-background-color: #27ae60; -fx-text-fill: white;" onAction="#handleAjouterSalle"/>
+        <Button text="Modifier" onAction="#handleModifierSalle"/>
+        <Button text="Supprimer" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" onAction="#handleSupprimerSalle"/>
+        <Separator orientation="VERTICAL"/>
+        <Button text="Importer" onAction="#handleImporter"/>
+        <Button text="Exporter" onAction="#handleExporter"/>
+        <Separator orientation="VERTICAL"/>
+        <TextField fx:id="rechercheField" promptText="Rechercher..." HBox.hgrow="ALWAYS"/>
+        <Button text="Rechercher" onAction="#handleRechercher"/>
+    </ToolBar>
+    
+    <!-- Filtres -->
+    <TitledBox text="Filtres" expanded="false">
+        <GridPane hgap="10" vgap="10" style="-fx-padding: 10;">
+            <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="typeFiltre" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="150"/>
+            
+            <Label text="Capacité min:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+            <TextField fx:id="capaciteMinFiltre" GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="100"/>
+            
+            <Label text="Bâtiment:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="batimentFiltre" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="150"/>
+            
+            <Label text="Étage:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="etageFiltre" GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="100"/>
+            
+            <Label text="Équipements:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ListView fx:id="equipementsFiltre" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" prefHeight="100"/>
+            
+            <HBox spacing="10" GridPane.rowIndex="3" GridPane.columnIndex="3" alignment="CENTER_RIGHT">
+                <Button text="Appliquer" style="-fx-background-color: #3498db; -fx-text-fill: white;" onAction="#handleAppliquerFiltres"/>
+                <Button text="Réinitialiser" onAction="#handleReinitialiserFiltres"/>
+            </HBox>
+        </GridPane>
+    </TitledBox>
+    
+    <!-- Tableau des salles -->
+    <TableView fx:id="sallesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50"/>
+            <TableColumn text="Numéro" prefWidth="100"/>
+            <TableColumn text="Nom" prefWidth="150"/>
+            <TableColumn text="Capacité" prefWidth="80"/>
+            <TableColumn text="Étage" prefWidth="60"/>
+            <TableColumn text="Type" prefWidth="100"/>
+            <TableColumn text="Bâtiment" prefWidth="150"/>
+            <TableColumn text="Équipements" prefWidth="200"/>
+            <TableColumn text="Actions" prefWidth="150"/>
+        </columns>
+    </TableView>
+    
+    <!-- Statistiques -->
+    <HBox spacing="20" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-background-radius: 5;">
+        <Label text="Total salles: 0" fx:id="totalSallesLabel"/>
+        <Label text="Capacité totale: 0" fx:id="capaciteTotaleLabel"/>
+        <Label text="Taux occupation: 0%" fx:id="tauxOccupationLabel"/>
+    </HBox>
+</VBox>

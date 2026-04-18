@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.AdminController"
+            prefHeight="700" prefWidth="1200">
+    
+    <top>
+        <VBox>
+            <Label text="UNIV-SCHEDULER - Administration" 
+                   style="-fx-font-size: 20px; -fx-padding: 10px; -fx-background-color: #2c3e50; -fx-text-fill: white;"/>
+            
+            <!-- Barre de navigation avec TOUS les boutons -->
+            <HBox spacing="5" style="-fx-padding: 10px; -fx-background-color: #34495e;">
+                <Button text="🏠 Dashboard" fx:id="btnDashboard" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="👥 Utilisateurs" fx:id="btnUsers" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="🏢 Bâtiments" fx:id="btnBatiments" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="🚪 Salles" fx:id="btnSalles" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="💻 Équipements" fx:id="btnEquipements" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="⏰ Créneaux" fx:id="btnCreneaux" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="📝 Réservations" fx:id="btnReservations" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="📅 Emplois" fx:id="btnEmplois" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="📚 Cours" fx:id="btnCours" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="📊 Stats" fx:id="btnStatistiques" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="⚙️ Config" fx:id="btnConfig" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Button text="📥 Export" fx:id="btnExport" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 12px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" 
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <VBox spacing="20" style="-fx-padding: 20px;">
+                
+                <!-- Titre de la page -->
+                <Label fx:id="titleLabel" text="🏠 TABLEAU DE BORD ADMINISTRATEUR" 
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                
+                <!-- STATISTIQUES GLOBALES - Ligne 1 -->
+                <HBox spacing="15" style="-fx-padding: 10px; -fx-background-color: #ecf0f1; -fx-background-radius: 5px;">
+                    <Label fx:id="totalUsersLabel" text="Total: 0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="adminsLabel" text="Admins: 0"/>
+                    <Label fx:id="gestionnairesLabel" text="Gestionnaires: 0"/>
+                    <Label fx:id="enseignantsLabel" text="Enseignants: 0"/>
+                    <Label fx:id="etudiantsLabel" text="Étudiants: 0"/>
+                </HBox>
+                
+                <!-- STATISTIQUES GLOBALES - Ligne 2 -->
+                <HBox spacing="15" style="-fx-padding: 10px; -fx-background-color: #ecf0f1; -fx-background-radius: 5px;">
+                    <Label fx:id="batimentsLabel" text="Bâtiments: 0"/>
+                    <Label fx:id="sallesLabel" text="Salles: 0"/>
+                    <Label fx:id="equipementsLabel" text="Équipements: 0"/>
+                    <Label fx:id="creneauxLabel" text="Créneaux: 0"/>
+                    <Label fx:id="reservationsLabel" text="Réservations: 0"/>
+                </HBox>
+                
+                <!-- STATISTIQUES GLOBALES - Ligne 3 -->
+                <HBox spacing="15" style="-fx-padding: 10px; -fx-background-color: #ecf0f1; -fx-background-radius: 5px;">
+                    <Label fx:id="emploisLabel" text="Emplois: 0"/>
+                    <Label fx:id="coursLabel" text="Cours: 0"/>
+                    <Label fx:id="tauxOccupationLabel" text="Taux: 0%" style="-fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
+                </HBox>
+                
+                <!-- BARRE D'OUTILS CRUD -->
+                <HBox spacing="10" style="-fx-padding: 5px 0;">
+                    <Button text="➕ Ajouter" fx:id="btnAjouter" 
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-font-weight: bold;"/>
+                    <Button text="✏️ Modifier" fx:id="btnModifier" 
+                            style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-font-weight: bold;"/>
+                    <Button text="🗑️ Supprimer" fx:id="btnSupprimer" 
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="📄 PDF" fx:id="btnExporterPDF" 
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                    <Button text="📊 Excel" fx:id="btnExporterExcel" 
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                </HBox>
+                
+                <!-- GRAPHIQUES -->
+                <HBox spacing="20">
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label text="Répartition des utilisateurs" style="-fx-font-weight: bold;"/>
+                        <PieChart fx:id="pieChart" prefHeight="250"/>
+                    </VBox>
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label text="Utilisateurs par rôle" style="-fx-font-weight: bold;"/>
+                        <BarChart fx:id="barChart" prefHeight="250">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT"/>
+                            </yAxis>
+                        </BarChart>
+                    </VBox>
+                </HBox>
+                
+                <!-- TABLEAU PRINCIPAL -->
+                <TableView fx:id="tableView" prefHeight="300"/>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+</BorderPane>

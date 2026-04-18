@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.ReservationController"
+      spacing="20" style="-fx-padding: 20;"
+      prefHeight="700" prefWidth="1000">
+
+    <Label text="Gestion des réservations" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <!-- Panneau de gauche : Formulaire de réservation -->
+        <VBox spacing="15" style="-fx-padding: 15; -fx-background-color: #f8f9fa; -fx-background-radius: 10;">
+            <Label text="Nouvelle réservation" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            
+            <GridPane hgap="10" vgap="15">
+                <!-- Salle -->
+                <Label text="Salle:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="salleCombo" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="250" promptText="Choisir une salle"/>
+                
+                <!-- Date -->
+                <Label text="Date:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                <DatePicker fx:id="datePicker" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="250"/>
+                
+                <!-- Heure de début -->
+                <Label text="Heure début:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="heureDebutCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="250" editable="true">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="08:00"/>
+                            <String fx:value="09:00"/>
+                            <String fx:value="10:00"/>
+                            <String fx:value="11:00"/>
+                            <String fx:value="12:00"/>
+                            <String fx:value="13:00"/>
+                            <String fx:value="14:00"/>
+                            <String fx:value="15:00"/>
+                            <String fx:value="16:00"/>
+                            <String fx:value="17:00"/>
+                            <String fx:value="18:00"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                
+                <!-- Durée -->
+                <Label text="Durée (minutes):" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="dureeCombo" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="250">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <Integer fx:value="30"/>
+                            <Integer fx:value="60"/>
+                            <Integer fx:value="90"/>
+                            <Integer fx:value="120"/>
+                            <Integer fx:value="150"/>
+                            <Integer fx:value="180"/>
+                            <Integer fx:value="240"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                
+                <!-- Motif -->
+                <Label text="Motif:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                <TextArea fx:id="motifArea" GridPane.rowIndex="4" GridPane.columnIndex="1" prefRowCount="3" wrapText="true" promptText="Raison de la réservation..."/>
+                
+                <!-- Boutons -->
+                <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                    <Button text="Vérifier disponibilité" onAction="#handleVerifierDisponibilite" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                    <Button text="Réserver" onAction="#handleReserver" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                    <Button text="Annuler" onAction="#handleAnnuler"/>
+                </HBox>
+            </GridPane>
+            
+            <!-- Message de disponibilité -->
+            <Label fx:id="disponibiliteLabel" wrapText="true" style="-fx-padding: 10; -fx-background-color: #fff3cd; -fx-background-radius: 5;"/>
+            
+            <!-- Réservations de la salle sélectionnée -->
+            <TitledPane text="Réservations du jour" expanded="false">
+                <ListView fx:id="reservationsJourList" prefHeight="150"/>
+            </TitledPane>
+        </VBox>
+        
+        <!-- Panneau de droite : Liste des réservations -->
+        <VBox spacing="15" style="-fx-padding: 15;">
+            <Label text="Mes réservations" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            
+            <!-- Filtres -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Statut:"/>
+                <ComboBox fx:id="filtreStatutCombo" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Tous"/>
+                            <String fx:value="EN_ATTENTE"/>
+                            <String fx:value="CONFIRMEE"/>
+                            <String fx:value="ANNULEE"/>
+                            <String fx:value="TERMINEE"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Label text="Période:"/>
+                <DatePicker fx:id="filtreDateDebut" promptText="Date début"/>
+                <Label text="au"/>
+                <DatePicker fx:id="filtreDateFin" promptText="Date fin"/>
+                <Button text="Filtrer" onAction="#handleFiltrer" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+            </HBox>
+            
+            <!-- Tableau des réservations -->
+            <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Salle" prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="salleId"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Date" prefWidth="100">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dateFormatee"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Horaire" prefWidth="120">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="periode"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Motif" prefWidth="200">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="motif"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Statut" prefWidth="100">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="statut"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Actions" prefWidth="150">
+                        <cellFactory>
+                            <TableColumn>
+                                <HBox alignment="CENTER" spacing="5">
+                                    <Button text="Confirmer" style="-fx-background-color: #27ae60; -fx-text-fill: white;" onAction="#handleConfirmer"/>
+                                    <Button text="Annuler" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" onAction="#handleAnnulerReservation"/>
+                                    <Button text="Détails" onAction="#handleVoirDetails"/>
+                                </HBox>
+                            </TableColumn>
+                        </cellFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+            
+            <!-- Statistiques rapides -->
+            <HBox spacing="20" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-background-radius: 5;">
+                <VBox spacing="5">
+                    <Label text="Total" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+                    <Label fx:id="totalReservationsLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Confirmées" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+                    <Label fx:id="confirmeesLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="En attente" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+                    <Label fx:id="attenteLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f39c12;"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Annulées" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;"/>
+                    <Label fx:id="annuleesLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </SplitPane>
+</VBox>

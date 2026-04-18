@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.EnseignantDashboardController"
+            prefHeight="700" prefWidth="1200">
+    
+    <top>
+        <VBox>
+            <Label text="UNIV-SCHEDULER - Espace Enseignant" 
+                   style="-fx-font-size: 20px; -fx-padding: 10px; -fx-background-color: #3498db; -fx-text-fill: white;"/>
+            <HBox spacing="10" style="-fx-padding: 10px; -fx-background-color: #5dade2;" alignment="CENTER_LEFT">
+                <VBox>
+                    <Label fx:id="welcomeLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label fx:id="infoLabel" style="-fx-text-fill: white;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" 
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 8px 15px; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            
+            <!-- Onglet 1 : Emploi du temps -->
+            <Tab text="📅 Mon emploi du temps">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Date:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="datePickerEmploi" prefWidth="150"/>
+                        <Button text="Voir mon emploi du temps" fx:id="btnVoirEmploi" 
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                    </HBox>
+                    <TableView fx:id="tableViewEmploi" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 2 : Salles libres -->
+            <Tab text="🏢 Salles libres">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Date:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="datePickerSalle" prefWidth="150"/>
+                        <Button text="Rechercher" fx:id="btnRechercherSalles" 
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-padding: 8px 15px;"/>
+                    </HBox>
+                    <TableView fx:id="tableViewSallesLibres" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 3 : Réserver une salle -->
+            <Tab text="📝 Réserver une salle">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Salle:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <ComboBox fx:id="salleReservationCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <DatePicker fx:id="datePickerReservation" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <Label text="Heure (HH:MM):" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="heureReservationField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <Label text="Durée (h):" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="dureeReservationField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <Label text="Motif:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextArea fx:id="motifReservationArea" prefWidth="300" prefHeight="80" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    </GridPane>
+                    
+                    <HBox spacing="10">
+                        <Button text="✅ Réserver" fx:id="btnReserver" 
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+            
+            <!-- Onglet 4 : Signaler un problème -->
+            <Tab text="⚠️ Signaler un problème">
+                <VBox spacing="15" style="-fx-padding: 20px;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Salle concernée:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <ComboBox fx:id="salleProblemeCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Description du problème:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextArea fx:id="descriptionProblemeArea" prefWidth="400" prefHeight="150" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    </GridPane>
+                    
+                    <HBox spacing="10">
+                        <Button text="🚨 Signaler" fx:id="btnSignaler" 
+                                style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+    
+</BorderPane>

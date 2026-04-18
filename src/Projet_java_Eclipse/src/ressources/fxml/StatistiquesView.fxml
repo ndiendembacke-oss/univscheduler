@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.StatistiqueController"
+      spacing="20" alignment="CENTER" style="-fx-padding: 20px;">
+    
+    <Label text="Statistiques" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <PieChart fx:id="pieChart" title="Répartition des utilisateurs" prefWidth="400" prefHeight="300"/>
+        <BarChart fx:id="barChart" title="Statistiques générales" prefWidth="400" prefHeight="300">
+            <xAxis>
+                <CategoryAxis label="Catégories"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Valeurs"/>
+            </yAxis>
+        </BarChart>
+    </HBox>
+    
+</VBox>

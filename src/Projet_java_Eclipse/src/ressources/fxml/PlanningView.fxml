@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.PlanningController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Planning hebdomadaire" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <!-- Contrôles -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Semaine précédente" onAction="#handleSemainePrecedente"/>
+        <DatePicker fx:id="semainePicker"/>
+        <Button text="Semaine suivante" onAction="#handleSemaineSuivante"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Vue:"/>
+        <ToggleGroup fx:id="vueGroup">
+            <RadioButton text="Jour" toggleGroup="$vueGroup" selected="true"/>
+            <RadioButton text="Semaine" toggleGroup="$vueGroup"/>
+            <RadioButton text="Mois" toggleGroup="$vueGroup"/>
+        </ToggleGroup>
+        <Button text="Aujourd'hui" style="-fx-background-color: #3498db; -fx-text-fill: white;" onAction="#handleAujourdhui"/>
+    </HBox>
+    
+    <!-- Planning (grille horaire) -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <GridPane fx:id="planningGrid" hgap="1" vgap="1" style="-fx-background-color: #ddd;">
+            <!-- Les cellules seront générées dynamiquement par le contrôleur -->
+        </GridPane>
+    </ScrollPane>
+    
+    <!-- Légende -->
+    <HBox spacing="20" style="-fx-padding: 10; -fx-background-color: #f8f9fa; -fx-background-radius: 5;">
+        <HBox spacing="5">
+            <Rectangle width="20" height="20" fill="#3498db"/>
+            <Label text="CM"/>
+        </HBox>
+        <HBox spacing="5">
+            <Rectangle width="20" height="20" fill="#2ecc71"/>
+            <Label text="TD"/>
+        </HBox>
+        <HBox spacing="5">
+            <Rectangle width="20" height="20" fill="#e74c3c"/>
+            <Label text="TP"/>
+        </HBox>
+        <HBox spacing="5">
+            <Rectangle width="20" height="20" fill="#f39c12"/>
+            <Label text="Réservation"/>
+        </HBox>
+    </HBox>
+</VBox>
